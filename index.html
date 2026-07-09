@@ -6068,11 +6068,28 @@ async function buscarSugestoesDaFonte(){
     if(dbFirebase){
         const snapshot = await dbFirebase.ref('sugestoes').get();
         const dados = snapshot.exists() ? snapshot.val() : {};
-        return Object.values(dados);
+        // Sugestões antigas (enviadas antes do recurso de resposta) não têm o campo "id" salvo,
+        // mas o Firebase já usa uma chave própria pra cada uma — reaproveitamos ela como id.
+        return Object.entries(dados).map(([chave, valor]) => ({ ...valor, id: valor.id || chave }));
     }
+
     const chave = 'sugestoes:log';
     const atual = await window.storage.get(chave, true);
-    return (atual && atual.value) ? JSON.parse(atual.value) : [];
+    let lista = (atual && atual.value) ? JSON.parse(atual.value) : [];
+
+    // Mesma correção pro fallback sem Firebase: registros antigos sem id ganham um agora,
+    // e isso é salvo de volta pra não perder o vínculo depois.
+    let mudou = false;
+    lista = lista.map((r, indice) => {
+        if(r.id) return r;
+        mudou = true;
+        return { ...r, id: gerarIdSugestao() + '_' + indice };
+    });
+    if(mudou){
+        try { await window.storage.set(chave, JSON.stringify(lista), true); } catch(e) { /* segue mesmo sem salvar */ }
+    }
+
+    return lista;
 }
 
 // Roda em segundo plano (a cada 1 min) pra avisar o aluno com uma bolinha vermelha no 💬
