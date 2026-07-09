@@ -570,53 +570,6 @@ body.dark .hero p{
     transform:translateY(-4px);
 }
 
-/* 🎨🎵 CARD FLUTUANTE — Temas e Música */
-.barra-flutuante{
-    position:fixed;
-    bottom:calc(24px + env(safe-area-inset-bottom));
-    left:calc(24px + env(safe-area-inset-left));
-    display:flex;
-    gap:8px;
-    padding:8px;
-    border-radius:999px;
-    background:rgba(255,255,255,0.45);
-    backdrop-filter:blur(32px) saturate(160%);
-    -webkit-backdrop-filter:blur(32px) saturate(160%);
-    border:1px solid rgba(255,255,255,0.4);
-    box-shadow:0 8px 20px rgba(0,0,0,0.15);
-    z-index:90;
-}
-
-.barra-flutuante button{
-    width:44px;
-    height:44px;
-    min-width:44px;
-    border-radius:50%;
-    border:none;
-    background:rgba(var(--brand-rgb),0.12);
-    font-size:1.3em;
-    cursor:pointer;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    transition:.3s;
-}
-
-.barra-flutuante button:hover{
-    transform:translateY(-4px) scale(1.08);
-}
-
-body.dark .barra-flutuante{
-    background:rgba(8,25,38,0.55);
-    border:1px solid rgba(255,255,255,0.12);
-    box-shadow:0 8px 32px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.08);
-}
-
-body.dark .barra-flutuante button{
-    background:rgba(255,255,255,0.08);
-    color:#fff;
-}
-
 /* Contraste melhorado no modo escuro */
 body.dark .capitulo-ref{
     opacity:.85;
@@ -1126,6 +1079,42 @@ body.dark .login-opcao button.btn-secundario {
 .login-opcao button.btn-secundario:hover {
     background: rgba(var(--brand-rgb),0.08);
     box-shadow: none;
+}
+
+/* Botão "Ver sugestões dos alunos" no painel do professor — mais bonito e com destaque */
+.btn-ver-sugestoes {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 18px;
+    margin-bottom: 14px;
+    border: none;
+    border-radius: 14px;
+    background: linear-gradient(135deg, var(--brand), var(--brand-light));
+    color: #fff;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: .2px;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(var(--brand-rgb),0.35);
+    transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
+}
+
+.btn-ver-sugestoes:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(var(--brand-rgb),0.45);
+    filter: brightness(1.05);
+}
+
+.btn-ver-sugestoes:active {
+    transform: translateY(0);
+    box-shadow: 0 6px 14px rgba(var(--brand-rgb),0.35);
+}
+
+body.dark .btn-ver-sugestoes {
+    box-shadow: 0 8px 20px rgba(0,0,0,0.45);
 }
 
 /* Empilha as duas opções em telas estreitas, com o divisor virando uma linha horizontal */
@@ -1644,6 +1633,78 @@ body.dark .painel-professor-resumo{
     opacity:.6;
     margin-bottom:10px;
     font-style:italic;
+}
+
+.chat-sugestoes-lista{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    max-height:40vh;
+    overflow-y:auto;
+    padding:4px 2px 10px;
+    margin-bottom:10px;
+}
+
+.chat-bolha{
+    max-width:85%;
+    padding:8px 12px;
+    border-radius:14px;
+    font-size:14px;
+    line-height:1.4;
+    display:flex;
+    flex-direction:column;
+    gap:2px;
+}
+
+.chat-bolha-eu{
+    align-self:flex-end;
+    background:var(--brand);
+    color:#fff;
+    border-bottom-right-radius:4px;
+}
+
+.chat-bolha-eu small{
+    opacity:.75;
+    font-size:11px;
+    align-self:flex-end;
+}
+
+.chat-sugestoes-input{
+    display:flex;
+    gap:8px;
+    align-items:flex-end;
+}
+
+.chat-sugestoes-input textarea{
+    flex:1;
+    resize:none;
+    border-radius:12px;
+    border:1px solid rgba(var(--brand-rgb),0.3);
+    padding:10px 12px;
+    font-family:inherit;
+    font-size:14px;
+    background:transparent;
+    color:inherit;
+}
+
+body.dark .chat-sugestoes-input textarea{
+    border-color:rgba(255,255,255,0.2);
+}
+
+.chat-sugestoes-input textarea:focus{
+    outline:none;
+    border-color:var(--brand);
+}
+
+.chat-sugestoes-input button{
+    white-space:nowrap;
+}
+
+.sugestao-item{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:4px;
 }
 
 .badge-entrada{
@@ -2250,6 +2311,7 @@ body.dark .tema-opcao{ background:rgba(244,241,232,0.08) !important; }
             <span class="conta-nome" id="contaNomeExibido">👋 Aluno</span>
             <button class="toggle conta-sair-btn" onclick="trocarConta()">Sair</button>
         </div>
+        <button class="toggle" id="sugestaoBtn" onclick="abrirSugestoes()" title="Mandar sugestão pro professor">💬</button>
         <button class="toggle" id="configBtn" onclick="abrirConfiguracoes()" title="Configurações">⚙️</button>
     </div>
 </header>
@@ -3889,22 +3951,42 @@ body.dark .tema-opcao{ background:rgba(244,241,232,0.08) !important; }
         <span class="close-modal" onclick="fecharPainelProfessor()">&times;</span>
         <h2 style="margin-bottom: 15px; color: var(--brand);">🧑‍🏫 Quem entrou no Study7</h2>
         <p style="opacity:.75; font-size:13px; margin-bottom:14px;">Todo mundo que já entrou (contas novas e retornos), de qualquer dispositivo.</p>
+        <button class="btn-ver-sugestoes" onclick="fecharPainelProfessor(); abrirPainelSugestoes();">💬 Ver sugestões dos alunos →</button>
         <div id="listaContasProfessor">Carregando...</div>
+    </div>
+</div>
+
+<!-- 💬 SUGESTÕES - chat do aluno pro professor -->
+<div class="modal" id="sugestoesModal">
+    <div class="modal-content" style="text-align:left;">
+        <span class="close-modal" onclick="fecharSugestoes()">&times;</span>
+        <h2 style="margin-bottom: 6px; color: var(--brand);">💬 Sugestões para o professor</h2>
+        <p style="opacity:.75; font-size:13px; margin-bottom:14px;">Mande uma ideia, dúvida ou sugestão. O professor vê tudo no painel dele.</p>
+        <div class="chat-sugestoes-lista" id="chatSugestoesLista">Carregando...</div>
+        <div class="chat-sugestoes-input">
+            <textarea id="inputSugestao" placeholder="Escreva sua sugestão..." maxlength="500" rows="2"></textarea>
+            <button class="btn-secundario" onclick="enviarSugestao()">Enviar →</button>
+        </div>
+    </div>
+</div>
+
+<!-- 💬 SUGESTÕES DOS ALUNOS - visão do professor -->
+<div class="modal" id="painelSugestoesModal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="fecharPainelSugestoes()">&times;</span>
+        <h2 style="margin-bottom: 15px; color: var(--brand);">💬 Sugestões dos alunos</h2>
+        <p style="opacity:.75; font-size:13px; margin-bottom:14px;">Tudo que os alunos mandaram, de qualquer dispositivo.</p>
+        <div id="listaSugestoesProfessor">Carregando...</div>
     </div>
 </div>
 
 <footer>
     Study7 © 2026 • Versão Final Unificada Integrada Completa
     <div><a href="#" class="link-painel-professor" onclick="abrirPainelProfessor(); return false;">🧑‍🏫 Painel do professor</a></div>
+    <div><a href="#" class="link-painel-professor" onclick="abrirSugestoes(); return false;">💬 Mandar sugestão</a></div>
 </footer>
 
 <button id="btnTopo" class="btn-topo" onclick="window.scrollTo({top:0, behavior:'smooth'})" title="Subir ao topo">Subir ao topo</button>
-
-<!-- CARD FLUTUANTE: Temas e Música -->
-<div class="barra-flutuante" id="barraFlutuante">
-    <button id="musicaBtn" onclick="alternarMusica()" title="Tocar música de fundo">🔇</button>
-    <button id="temasBtn" onclick="abrirTemas()" title="Temas visuais">🎨</button>
-</div>
 
 </div>
 
@@ -5044,6 +5126,14 @@ window.onclick = function(event) {
     if (event.target == config) {
         fecharConfiguracoes();
     }
+    const sugestoes = document.getElementById("sugestoesModal");
+    if (event.target == sugestoes) {
+        fecharSugestoes();
+    }
+    const painelSugestoes = document.getElementById("painelSugestoesModal");
+    if (event.target == painelSugestoes) {
+        fecharPainelSugestoes();
+    }
 }
 
 // ===== TEMAS VISUAIS =====
@@ -5617,6 +5707,7 @@ function embaralharProva(materiaId){
 
 // ===== SISTEMA DE CONTA (só com o nome) =====
 const CHAVE_CONTA = 'conta:nome';
+let nomeContaAtual = '';
 
 async function iniciarConta() {
     try {
@@ -5640,6 +5731,7 @@ function entrarComNome(nome, salvar){
     document.body.classList.remove('aguardando-login');
 
     const primeiroNome = nome.trim().split(/\s+/)[0];
+    nomeContaAtual = primeiroNome;
 
     const badge = document.getElementById('contaUsuario');
     const nomeExibido = document.getElementById('contaNomeExibido');
@@ -5760,6 +5852,171 @@ async function abrirPainelProfessor(){
 
 function fecharPainelProfessor(){
     document.getElementById('painelProfessorModal').style.display = 'none';
+}
+
+// ===== SUGESTÕES DOS ALUNOS (chat do aluno pro professor) =====
+const CHAVE_SUGESTOES_LOCAL = 'sugestoes:minhas';
+
+function escapeHtmlSugestao(texto){
+    const div = document.createElement('div');
+    div.textContent = texto;
+    return div.innerHTML;
+}
+
+function abrirSugestoes(){
+    document.getElementById('sugestoesModal').style.display = 'flex';
+    carregarSugestoesLocais();
+    setTimeout(() => document.getElementById('inputSugestao')?.focus(), 250);
+}
+
+function fecharSugestoes(){
+    document.getElementById('sugestoesModal').style.display = 'none';
+}
+
+async function carregarSugestoesLocais(){
+    try {
+        const atual = await window.storage.get(CHAVE_SUGESTOES_LOCAL, false);
+        const minhas = (atual && atual.value) ? JSON.parse(atual.value) : [];
+        renderizarChatSugestoes(minhas);
+    } catch(e) {
+        renderizarChatSugestoes([]);
+    }
+}
+
+function renderizarChatSugestoes(minhas){
+    const lista = document.getElementById('chatSugestoesLista');
+    if(!lista) return;
+
+    if(minhas.length === 0){
+        lista.innerHTML = '<div class="lista-contas-vazio">Nenhuma sugestão enviada ainda. Escreva a primeira ali embaixo 👇</div>';
+        return;
+    }
+
+    lista.innerHTML = minhas.map(m => {
+        const data = new Date(m.data);
+        const dataFormatada = data.toLocaleDateString('pt-BR') + ' às ' + data.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+        return `<div class="chat-bolha chat-bolha-eu"><span>${escapeHtmlSugestao(m.mensagem)}</span><small>${dataFormatada}</small></div>`;
+    }).join('');
+
+    lista.scrollTop = lista.scrollHeight;
+}
+
+async function enviarSugestao(){
+    const input = document.getElementById('inputSugestao');
+    const texto = (input?.value || '').trim();
+    if(!texto) return;
+
+    const nome = nomeContaAtual || 'Aluno';
+    const registro = { nome, mensagem: texto, data: new Date().toISOString() };
+
+    input.value = '';
+    input.disabled = true;
+
+    await firebasePronto; // espera o SDK carregar (só faz algo fora do Claude, com Firebase configurado)
+    if(dbFirebase){
+        try {
+            await dbFirebase.ref('sugestoes').push(registro);
+        } catch(e) {
+            console.error('Firebase: não foi possível enviar a sugestão, salvando só neste dispositivo:', e);
+        }
+    } else {
+        try {
+            const chave = 'sugestoes:log';
+            let listaGeral = [];
+            try {
+                const atualGeral = await window.storage.get(chave, true);
+                if(atualGeral && atualGeral.value) listaGeral = JSON.parse(atualGeral.value);
+            } catch(e) { /* ainda não existe log */ }
+
+            listaGeral.push(registro);
+            await window.storage.set(chave, JSON.stringify(listaGeral), true);
+        } catch(e) {
+            console.error('Não foi possível salvar a sugestão:', e);
+        }
+    }
+
+    // Guarda uma cópia local (só deste aluno) pra ele ver o próprio histórico no chat
+    try {
+        const atual = await window.storage.get(CHAVE_SUGESTOES_LOCAL, false);
+        const minhas = (atual && atual.value) ? JSON.parse(atual.value) : [];
+        minhas.push(registro);
+        await window.storage.set(CHAVE_SUGESTOES_LOCAL, JSON.stringify(minhas), false);
+        renderizarChatSugestoes(minhas);
+    } catch(e) {
+        console.error('Não foi possível salvar a sugestão localmente:', e);
+    }
+
+    input.disabled = false;
+    input.focus();
+}
+
+document.getElementById('inputSugestao')?.addEventListener('keydown', function(e){
+    if(e.key === 'Enter' && !e.shiftKey){
+        e.preventDefault();
+        enviarSugestao();
+    }
+});
+
+// ===== PAINEL DO PROFESSOR: ver sugestões dos alunos =====
+async function abrirPainelSugestoes(){
+    if(!professorAutenticado){
+        const senha = window.prompt('Senha do professor:');
+        if(senha === null) return; // cancelou
+        if(senha.trim() !== SENHA_PROFESSOR){
+            alert('Senha incorreta.');
+            return;
+        }
+        professorAutenticado = true;
+    }
+
+    const modal = document.getElementById('painelSugestoesModal');
+    const lista = document.getElementById('listaSugestoesProfessor');
+    modal.style.display = 'flex';
+    lista.textContent = 'Carregando...';
+
+    try {
+        await firebasePronto;
+        let registros = [];
+
+        if(dbFirebase){
+            const snapshot = await dbFirebase.ref('sugestoes').get();
+            const dados = snapshot.exists() ? snapshot.val() : {};
+            registros = Object.values(dados);
+        } else {
+            const chave = 'sugestoes:log';
+            const atual = await window.storage.get(chave, true);
+            registros = (atual && atual.value) ? JSON.parse(atual.value) : [];
+        }
+
+        if(registros.length === 0){
+            lista.innerHTML = '<div class="lista-contas-vazio">Nenhuma sugestão recebida ainda.</div>';
+            return;
+        }
+
+        registros.sort((a, b) => new Date(b.data) - new Date(a.data));
+
+        const MAX_EXIBIDOS_SUGESTOES = 100;
+        const exibidos = registros.slice(0, MAX_EXIBIDOS_SUGESTOES);
+
+        const avisoLimite = registros.length > MAX_EXIBIDOS_SUGESTOES
+            ? `<div class="painel-professor-aviso">Mostrando as ${MAX_EXIBIDOS_SUGESTOES} sugestões mais recentes.</div>`
+            : '';
+
+        lista.innerHTML = avisoLimite + exibidos.map(r => {
+            const data = new Date(r.data);
+            const dataFormatada = data.toLocaleDateString('pt-BR') + ' às ' + data.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+            return `<div class="lista-contas-item sugestao-item">
+                <span><b>👤 ${escapeHtmlSugestao(r.nome)}</b> · ${dataFormatada}</span>
+                <span>${escapeHtmlSugestao(r.mensagem)}</span>
+            </div>`;
+        }).join('');
+    } catch(e) {
+        lista.innerHTML = '<div class="lista-contas-vazio">Não foi possível carregar as sugestões.</div>';
+    }
+}
+
+function fecharPainelSugestoes(){
+    document.getElementById('painelSugestoesModal').style.display = 'none';
 }
 
 function entrarConta(){
