@@ -2805,6 +2805,18 @@ body.dark .tema-opcao{ background:rgba(244,241,232,0.08) !important; }
             </ul>
         </div>
 
+        <div class="subject-panel producaotextual">
+            <h3>✍️ Produção Textual</h3>
+            <ul>
+                <li>🔹 O que é poema visual</li>
+                <li>🔹 Diferença para o poema tradicional</li>
+                <li>🔹 Planejamento: tema e forma</li>
+                <li>🔹 Repetição como recurso visual</li>
+                <li>🔹 Espaço em branco como parte do sentido</li>
+                <li>🔹 Rascunho e revisão do poema visual</li>
+            </ul>
+        </div>
+
     </div>
 </div>
 
@@ -2823,15 +2835,23 @@ body.dark .tema-opcao{ background:rgba(244,241,232,0.08) !important; }
         <button class="provas-menu-btn" data-materia="ingles" onclick="irParaProva('ingles')">🇬🇧 Inglês<span>Fazer Prova</span></button>
         <button class="provas-menu-btn" data-materia="artes" onclick="irParaProva('artes')">🎨 Artes<span>Fazer Prova</span></button>
         <button class="provas-menu-btn" data-materia="producaotextual" onclick="irParaProva('producaotextual')">✍️ Produção Textual<span>Fazer Prova</span></button>
+        <button class="provas-menu-btn" data-materia="portugues2" onclick="irParaProva('portugues2')">📖 Português 2<span>Fazer Prova</span></button>
+        <button class="provas-menu-btn" data-materia="matematica2" onclick="irParaProva('matematica2')">➗ Matemática 2<span>Fazer Prova</span></button>
+        <button class="provas-menu-btn" data-materia="geografia2" onclick="irParaProva('geografia2')">🌎 Geografia 2<span>Fazer Prova</span></button>
+        <button class="provas-menu-btn" data-materia="ciencias2" onclick="irParaProva('ciencias2')">🧪 Ciências 2<span>Fazer Prova</span></button>
+        <button class="provas-menu-btn" data-materia="historia2" onclick="irParaProva('historia2')">🏛️ História 2<span>Fazer Prova</span></button>
+        <button class="provas-menu-btn" data-materia="ingles2" onclick="irParaProva('ingles2')">🇬🇧 Inglês 2<span>Fazer Prova</span></button>
+        <button class="provas-menu-btn" data-materia="artes2" onclick="irParaProva('artes2')">🎨 Artes 2<span>Fazer Prova</span></button>
     </div>
 
     <div class="provas-list">
 
+        
         <!-- PROVÃO GERAL (TODAS AS MATÉRIAS) -->
         <div class="prova-panel" id="painel-prova-provao">
             <h3>🏆 Provão Geral</h3>
-            <span class="capitulo-ref">25 questões — 5 de cada matéria: Português, Matemática, Geografia, Ciências e História</span>
-            <svg viewBox="0 0 440 100" xmlns="http://www.w3.org/2000/svg" style="width:100%; max-width:440px; height:auto; display:block; margin:12px auto;">
+            <span class="capitulo-ref">30 questões — 5 de cada matéria: Português, Matemática, Geografia, Ciências, História e Produção Textual</span>
+            <svg viewBox="0 0 530 100" xmlns="http://www.w3.org/2000/svg" style="width:100%; max-width:530px; height:auto; display:block; margin:12px auto;">
                 <circle cx="45" cy="45" r="38" fill="#fee2e2" stroke="var(--brand)" stroke-width="2"/>
                 <text x="45" y="58" font-size="30" text-anchor="middle">📖</text>
                 <text x="45" y="95" font-size="10.5" text-anchor="middle" fill="#334155">Português</text>
@@ -2847,6 +2867,9 @@ body.dark .tema-opcao{ background:rgba(244,241,232,0.08) !important; }
                 <circle cx="405" cy="45" r="38" fill="#fee2e2" stroke="var(--brand)" stroke-width="2"/>
                 <text x="405" y="58" font-size="30" text-anchor="middle">🏛️</text>
                 <text x="405" y="95" font-size="10.5" text-anchor="middle" fill="#334155">História</text>
+                <circle cx="490" cy="45" r="38" fill="#fee2e2" stroke="var(--brand)" stroke-width="2"/>
+                <text x="490" y="58" font-size="28" text-anchor="middle">✍️</text>
+                <text x="490" y="95" font-size="9.5" text-anchor="middle" fill="#334155">Produção Textual</text>
             </svg>
             <form id="prova-provao">
                 <div class="quiz-q">
@@ -3029,11 +3052,10 @@ body.dark .tema-opcao{ background:rgba(244,241,232,0.08) !important; }
                     <label class="quiz-opt"><input type="radio" name="h5" value="d"> d) Substituiu a Bíblia por outros livros</label>
                 </div>
 
-                <button type="button" class="corrigir-btn" onclick="corrigirProva('provao', {p1:'a',p2:'b',p3:'a',p4:'c',p5:'a',m1:'a',m2:'c',m3:'b',m4:'c',m5:'b',g1:'b',g2:'a',g3:'a',g4:'b',g5:'a',c1:'a',c2:'b',c3:'b',c4:'b',c5:'a',h1:'b',h2:'b',h3:'c',h4:'b',h5:'b'})">✅ Corrigir Provão</button>
+                <button type="button" class="corrigir-btn" id="btn-corrigir-provao">✅ Corrigir Provão</button>
                 <div class="prova-resultado" id="resultado-provao"></div>
             </form>
         </div>
-
 
         <!-- PORTUGUÊS -->
         <div class="prova-panel" id="painel-prova-portugues">
@@ -3765,88 +3787,30 @@ body.dark .tema-opcao{ background:rgba(244,241,232,0.08) !important; }
         <div class="prova-panel" id="painel-prova-producaotextual">
             <h3>✍️ Produção Textual</h3>
             <span class="capitulo-ref">Baseado no conteúdo: Poema Visual</span>
-            <svg viewBox="0 0 320 100" xmlns="http://www.w3.org/2000/svg" style="width:100%; max-width:320px; height:auto; display:block; margin:12px auto;">
-                <rect x="10" y="10" width="300" height="80" rx="10" fill="#ccfbf1" stroke="#14b8a6" stroke-width="2.5"/>
-                <text x="45" y="35" font-size="11" text-anchor="middle" fill="#0f766e">chu</text>
-                <text x="70" y="45" font-size="11" text-anchor="middle" fill="#0f766e">va</text>
-                <text x="100" y="55" font-size="11" text-anchor="middle" fill="#0f766e">chuva</text>
-                <text x="140" y="65" font-size="11" text-anchor="middle" fill="#0f766e">chu va</text>
-                <text x="185" y="75" font-size="11" text-anchor="middle" fill="#0f766e">chuva chuva</text>
-                <text x="235" y="30" font-size="24" text-anchor="middle">🌧️</text>
-                <text x="160" y="95" font-size="10.5" text-anchor="middle" fill="#0f766e" font-weight="bold">As palavras "desenham" o tema</text>
+            <svg viewBox="0 0 340 230" xmlns="http://www.w3.org/2000/svg" style="width:100%; max-width:340px; height:auto; display:block; margin:12px auto;">
+                <rect x="0" y="0" width="340" height="230" rx="14" fill="#e0f2fe"/>
+                <circle cx="288" cy="34" r="17" fill="#fde68a"/>
+                <ellipse cx="65" cy="28" rx="36" ry="15" fill="#ffffff" opacity=".92"/>
+                <ellipse cx="102" cy="33" rx="27" ry="12" fill="#ffffff" opacity=".92"/>
+                <ellipse cx="35" cy="34" rx="22" ry="10" fill="#ffffff" opacity=".92"/>
+                <!-- a própria palavra "chuva", repetida em colunas de tamanhos diferentes, desenha as linhas da chuva caindo -->
+                <g font-size="10.5" font-weight="600" fill="#0369a1" text-anchor="middle">
+                    <text x="35" y="70">chuva</text><text x="35" y="86">chuva</text><text x="35" y="102">chuva</text><text x="35" y="118">chuva</text>
+                    <text x="80" y="58">chuva</text><text x="80" y="74">chuva</text><text x="80" y="90">chuva</text><text x="80" y="106">chuva</text><text x="80" y="122">chuva</text><text x="80" y="138">chuva</text>
+                    <text x="125" y="66">chuva</text><text x="125" y="82">chuva</text><text x="125" y="98">chuva</text>
+                    <text x="170" y="60">chuva</text><text x="170" y="76">chuva</text><text x="170" y="92">chuva</text><text x="170" y="108">chuva</text><text x="170" y="124">chuva</text>
+                    <text x="215" y="72">chuva</text><text x="215" y="88">chuva</text><text x="215" y="104">chuva</text><text x="215" y="120">chuva</text>
+                    <text x="260" y="64">chuva</text><text x="260" y="80">chuva</text><text x="260" y="96">chuva</text><text x="260" y="112">chuva</text><text x="260" y="128">chuva</text><text x="260" y="144">chuva</text>
+                    <text x="305" y="76">chuva</text><text x="305" y="92">chuva</text><text x="305" y="108">chuva</text>
+                </g>
+                <path d="M15,178 Q90,168 170,178 T325,178" stroke="#0284c7" stroke-width="2.5" fill="none" opacity=".55"/>
+                <path d="M35,190 Q90,183 150,190 T280,190" stroke="#0284c7" stroke-width="1.8" fill="none" opacity=".35"/>
+                <text x="170" y="212" font-size="11" text-anchor="middle" fill="#075985" font-weight="bold">A própria palavra "chuva" forma as linhas da chuva caindo</text>
             </svg>
             <form id="prova-producaotextual">
-                <div class="quiz-q">
-                    <p>1. O que define um poema visual?</p>
-                    <label class="quiz-opt"><input type="radio" name="pt1" value="a"> a) A rima perfeita entre os versos</label>
-                    <label class="quiz-opt"><input type="radio" name="pt1" value="b"> b) A disposição das palavras na página forma um desenho relacionado ao tema</label>
-                    <label class="quiz-opt"><input type="radio" name="pt1" value="c"> c) O uso obrigatório de quatro estrofes</label>
-                    <label class="quiz-opt"><input type="radio" name="pt1" value="d"> d) A ausência total de palavras</label>
-                </div>
-                <div class="quiz-q">
-                    <p>2. No poema visual, além das palavras, o que ajuda a comunicar o sentido do texto?</p>
-                    <label class="quiz-opt"><input type="radio" name="pt2" value="a"> a) A imagem/desenho formado pela disposição das palavras</label>
-                    <label class="quiz-opt"><input type="radio" name="pt2" value="b"> b) A rima entre os versos</label>
-                    <label class="quiz-opt"><input type="radio" name="pt2" value="c"> c) O número de sílabas de cada verso</label>
-                    <label class="quiz-opt"><input type="radio" name="pt2" value="d"> d) O uso de letra cursiva</label>
-                </div>
-                <div class="quiz-q">
-                    <p>3. Um poema visual sobre o tema "chuva" provavelmente vai organizar as palavras:</p>
-                    <label class="quiz-opt"><input type="radio" name="pt3" value="a"> a) Sempre em uma única linha reta</label>
-                    <label class="quiz-opt"><input type="radio" name="pt3" value="b"> b) De forma que lembrem visualmente gotas ou uma cascata caindo</label>
-                    <label class="quiz-opt"><input type="radio" name="pt3" value="c"> c) Em ordem alfabética</label>
-                    <label class="quiz-opt"><input type="radio" name="pt3" value="d"> d) Sem nenhuma relação com o tema</label>
-                </div>
-                <div class="quiz-q">
-                    <p>4. No poema visual, o que costuma ter tanta importância quanto (ou mais que) as palavras?</p>
-                    <label class="quiz-opt"><input type="radio" name="pt4" value="a"> a) A capa do livro</label>
-                    <label class="quiz-opt"><input type="radio" name="pt4" value="b"> b) A forma visual/gráfica em que elas são organizadas</label>
-                    <label class="quiz-opt"><input type="radio" name="pt4" value="c"> c) O nome do autor</label>
-                    <label class="quiz-opt"><input type="radio" name="pt4" value="d"> d) O número de páginas</label>
-                </div>
-                <div class="quiz-q">
-                    <p>5. Qual é a principal diferença entre o poema tradicional e o poema visual?</p>
-                    <label class="quiz-opt"><input type="radio" name="pt5" value="a"> a) O poema visual não pode ter tema</label>
-                    <label class="quiz-opt"><input type="radio" name="pt5" value="b"> b) O tradicional se organiza em versos/estrofes com métrica e rima; o visual dá tanto ou mais peso à forma gráfica</label>
-                    <label class="quiz-opt"><input type="radio" name="pt5" value="c"> c) Não existe diferença</label>
-                    <label class="quiz-opt"><input type="radio" name="pt5" value="d"> d) O poema visual só pode ser escrito em outro idioma</label>
-                </div>
-                <div class="quiz-q">
-                    <p>6. Em um poema visual, o uso do espaço em branco na página serve para:</p>
-                    <label class="quiz-opt"><input type="radio" name="pt6" value="a"> a) Fazer parte do sentido do poema, ajudando a formar a imagem</label>
-                    <label class="quiz-opt"><input type="radio" name="pt6" value="b"> b) Corrigir erros de digitação</label>
-                    <label class="quiz-opt"><input type="radio" name="pt6" value="c"> c) Substituir o título</label>
-                    <label class="quiz-opt"><input type="radio" name="pt6" value="d"> d) Indicar o fim do poema, sem nenhum outro papel</label>
-                </div>
-                <div class="quiz-q">
-                    <p>7. Repetir uma palavra ou letra várias vezes dentro de um poema visual costuma servir para:</p>
-                    <label class="quiz-opt"><input type="radio" name="pt7" value="a"> a) Preencher e ajudar a formar o desenho do poema</label>
-                    <label class="quiz-opt"><input type="radio" name="pt7" value="b"> b) Aumentar o número de estrofes obrigatórias</label>
-                    <label class="quiz-opt"><input type="radio" name="pt7" value="c"> c) Corrigir erros de ortografia</label>
-                    <label class="quiz-opt"><input type="radio" name="pt7" value="d"> d) Substituir a pontuação por vírgulas</label>
-                </div>
-                <div class="quiz-q">
-                    <p>8. Antes de escrever um poema visual, o que é recomendado planejar primeiro?</p>
-                    <label class="quiz-opt"><input type="radio" name="pt8" value="a"> a) O tema e a forma/desenho que combina com ele</label>
-                    <label class="quiz-opt"><input type="radio" name="pt8" value="b"> b) Apenas o número de palavras difíceis</label>
-                    <label class="quiz-opt"><input type="radio" name="pt8" value="c"> c) A editora que vai publicar</label>
-                    <label class="quiz-opt"><input type="radio" name="pt8" value="d"> d) O tamanho da letra usada</label>
-                </div>
-                <div class="quiz-q">
-                    <p>9. Na revisão de um poema visual pronto, o que vale a pena conferir?</p>
-                    <label class="quiz-opt"><input type="radio" name="pt9" value="a"> a) Se rima com um poema de outro autor</label>
-                    <label class="quiz-opt"><input type="radio" name="pt9" value="b"> b) Se dá pra reconhecer o tema só de olhar a forma, mesmo antes de ler as palavras</label>
-                    <label class="quiz-opt"><input type="radio" name="pt9" value="c"> c) Se tem exatamente 14 versos</label>
-                    <label class="quiz-opt"><input type="radio" name="pt9" value="d"> d) Se usa apenas letras maiúsculas</label>
-                </div>
-                <div class="quiz-q">
-                    <p>10. Um bom rascunho de poema visual costuma começar por:</p>
-                    <label class="quiz-opt"><input type="radio" name="pt10" value="a"> a) Desenhar a forma a lápis e depois encaixar as palavras dentro dela</label>
-                    <label class="quiz-opt"><input type="radio" name="pt10" value="b"> b) Escolher a rima antes de tudo</label>
-                    <label class="quiz-opt"><input type="radio" name="pt10" value="c"> c) Contar o número de sílabas de cada palavra</label>
-                    <label class="quiz-opt"><input type="radio" name="pt10" value="d"> d) Escrever sem nenhum planejamento</label>
-                </div>
-                <button type="button" class="corrigir-btn" onclick="corrigirProva('producaotextual', {pt1:'b',pt2:'a',pt3:'b',pt4:'b',pt5:'b',pt6:'a',pt7:'a',pt8:'a',pt9:'b',pt10:'a'})">✅ Corrigir prova</button>
+                <!-- As questões desta prova são sorteadas de um banco maior (ver BANCO_PRODUCAO_TEXTUAL no script),
+                     para variar a cada tentativa e evitar decoreba caso o aluno refaça a prova. -->
+                <button type="button" class="corrigir-btn">✅ Corrigir prova</button>
                 <div class="prova-resultado" id="resultado-producaotextual"></div>
             </form>
         </div>
@@ -4126,6 +4090,568 @@ body.dark .tema-opcao{ background:rgba(244,241,232,0.08) !important; }
                 <div class="prova-resultado" id="resultado-historia"></div>
             </form>
         </div>
+
+        <!-- PORTUGUÊS 2 -->
+        <div class="prova-panel" id="painel-prova-portugues2">
+            <h3>📖 Português 2</h3>
+            <span class="capitulo-ref">Baseado no conteúdo: Sujeito, Figuras de linguagem, Concordância verbal e Acentuação</span>
+            <form id="prova-portugues2">
+                <div class="quiz-q">
+                    <p>1. Em "Os alunos e a professora chegaram cedo", o sujeito é classificado como:</p>
+                    <label class="quiz-opt"><input type="radio" name="p1" value="a"> a) Simples</label>
+                    <label class="quiz-opt"><input type="radio" name="p1" value="b"> b) Composto</label>
+                    <label class="quiz-opt"><input type="radio" name="p1" value="c"> c) Oculto</label>
+                    <label class="quiz-opt"><input type="radio" name="p1" value="d"> d) Indeterminado</label>
+                </div>
+                <div class="quiz-q">
+                    <p>2. "Miau", "tique-taque" e "boom" são exemplos da figura de linguagem chamada:</p>
+                    <label class="quiz-opt"><input type="radio" name="p2" value="a"> a) Metáfora</label>
+                    <label class="quiz-opt"><input type="radio" name="p2" value="b"> b) Hipérbole</label>
+                    <label class="quiz-opt"><input type="radio" name="p2" value="c"> c) Onomatopeia</label>
+                    <label class="quiz-opt"><input type="radio" name="p2" value="d"> d) Comparação</label>
+                </div>
+                <div class="quiz-q">
+                    <p>3. Assinale a frase com concordância verbal correta:</p>
+                    <label class="quiz-opt"><input type="radio" name="p3" value="a"> a) Os meninos brincavam no parque</label>
+                    <label class="quiz-opt"><input type="radio" name="p3" value="b"> b) Os meninos brincava no parque</label>
+                    <label class="quiz-opt"><input type="radio" name="p3" value="c"> c) O menino brincavam no parque</label>
+                    <label class="quiz-opt"><input type="radio" name="p3" value="d"> d) Os meninos brincou no parque</label>
+                </div>
+                <div class="quiz-q">
+                    <p>4. A palavra "árvore" é classificada, quanto à acentuação, como:</p>
+                    <label class="quiz-opt"><input type="radio" name="p4" value="a"> a) Oxítona</label>
+                    <label class="quiz-opt"><input type="radio" name="p4" value="b"> b) Paroxítona</label>
+                    <label class="quiz-opt"><input type="radio" name="p4" value="c"> c) Proparoxítona</label>
+                    <label class="quiz-opt"><input type="radio" name="p4" value="d"> d) Monossílaba</label>
+                </div>
+                <div class="quiz-q">
+                    <p>5. Em "Ele é tão forte quanto um touro", a figura de linguagem usada é:</p>
+                    <label class="quiz-opt"><input type="radio" name="p5" value="a"> a) Metáfora</label>
+                    <label class="quiz-opt"><input type="radio" name="p5" value="b"> b) Comparação</label>
+                    <label class="quiz-opt"><input type="radio" name="p5" value="c"> c) Onomatopeia</label>
+                    <label class="quiz-opt"><input type="radio" name="p5" value="d"> d) Antítese</label>
+                </div>
+                <div class="quiz-q">
+                    <p>6. Em "Chovi mil lágrimas naquela noite", a figura de linguagem usada é:</p>
+                    <label class="quiz-opt"><input type="radio" name="p6" value="a"> a) Hipérbole</label>
+                    <label class="quiz-opt"><input type="radio" name="p6" value="b"> b) Onomatopeia</label>
+                    <label class="quiz-opt"><input type="radio" name="p6" value="c"> c) Comparação</label>
+                    <label class="quiz-opt"><input type="radio" name="p6" value="d"> d) Metonímia</label>
+                </div>
+                <div class="quiz-q">
+                    <p>7. Em "Choveu a noite toda", o sujeito da oração é:</p>
+                    <label class="quiz-opt"><input type="radio" name="p7" value="a"> a) Composto</label>
+                    <label class="quiz-opt"><input type="radio" name="p7" value="b"> b) Inexistente (oração sem sujeito)</label>
+                    <label class="quiz-opt"><input type="radio" name="p7" value="c"> c) Oculto</label>
+                    <label class="quiz-opt"><input type="radio" name="p7" value="d"> d) Indeterminado</label>
+                </div>
+                <div class="quiz-q">
+                    <p>8. Em "O bolo permaneceu quentinho", o verbo de ligação e o predicativo são, respectivamente:</p>
+                    <label class="quiz-opt"><input type="radio" name="p8" value="a"> a) Permaneceu / quentinho</label>
+                    <label class="quiz-opt"><input type="radio" name="p8" value="b"> b) O bolo / permaneceu</label>
+                    <label class="quiz-opt"><input type="radio" name="p8" value="c"> c) Quentinho / permaneceu</label>
+                    <label class="quiz-opt"><input type="radio" name="p8" value="d"> d) Não há verbo de ligação nessa frase</label>
+                </div>
+                <div class="quiz-q">
+                    <p>9. A palavra "lâmpada" é classificada, quanto à acentuação, como:</p>
+                    <label class="quiz-opt"><input type="radio" name="p9" value="a"> a) Oxítona</label>
+                    <label class="quiz-opt"><input type="radio" name="p9" value="b"> b) Paroxítona</label>
+                    <label class="quiz-opt"><input type="radio" name="p9" value="c"> c) Proparoxítona</label>
+                    <label class="quiz-opt"><input type="radio" name="p9" value="d"> d) Monossílaba tônica</label>
+                </div>
+                <div class="quiz-q">
+                    <p>10. Assinale a alternativa com concordância verbal correta:</p>
+                    <label class="quiz-opt"><input type="radio" name="p10" value="a"> a) Nós vamos à escola</label>
+                    <label class="quiz-opt"><input type="radio" name="p10" value="b"> b) Nós vai à escola</label>
+                    <label class="quiz-opt"><input type="radio" name="p10" value="c"> c) Nós vamos à escola nós dois</label>
+                    <label class="quiz-opt"><input type="radio" name="p10" value="d"> d) Nós ia à escola</label>
+                </div>
+                <button type="button" class="corrigir-btn" onclick="corrigirProva('portugues2', {p1:'b',p2:'c',p3:'a',p4:'b',p5:'b',p6:'a',p7:'b',p8:'a',p9:'c',p10:'a'})">✅ Corrigir prova</button>
+                <div class="prova-resultado" id="resultado-portugues2"></div>
+            </form>
+        </div>
+
+        <!-- MATEMÁTICA 2 -->
+        <div class="prova-panel" id="painel-prova-matematica2">
+            <h3>➗ Matemática 2</h3>
+            <span class="capitulo-ref">Baseado no caderno de 01/07 e 06/07 — equações, volume por deslocamento de água, expressões algébricas e sequências</span>
+            <form id="prova-matematica2">
+                <div class="quiz-q">
+                    <p>1. Resolva a equação: 2x + 5 = x + 9. Qual é o valor de x?</p>
+                    <label class="quiz-opt"><input type="radio" name="m1" value="a"> a) x = 2</label>
+                    <label class="quiz-opt"><input type="radio" name="m1" value="b"> b) x = 4</label>
+                    <label class="quiz-opt"><input type="radio" name="m1" value="c"> c) x = 5</label>
+                    <label class="quiz-opt"><input type="radio" name="m1" value="d"> d) x = 9</label>
+                </div>
+                <div class="quiz-q">
+                    <p>2. Um recipiente tinha 2000 cm³ de água. Ao mergulhar uma pedra dentro dele, o nível da água subiu para 2350 cm³. Qual é o volume da pedra?</p>
+                    <label class="quiz-opt"><input type="radio" name="m2" value="a"> a) 2350 cm³</label>
+                    <label class="quiz-opt"><input type="radio" name="m2" value="b"> b) 2000 cm³</label>
+                    <label class="quiz-opt"><input type="radio" name="m2" value="c"> c) 350 cm³</label>
+                    <label class="quiz-opt"><input type="radio" name="m2" value="d"> d) 4350 cm³</label>
+                </div>
+                <div class="quiz-q">
+                    <p>3. Uma oficina cobra um valor fixo de R$20,00 pela visita, mais R$15,00 por hora de serviço. Sendo h o número de horas, qual expressão algébrica representa o preço do serviço?</p>
+                    <label class="quiz-opt"><input type="radio" name="m3" value="a"> a) 20h + 15</label>
+                    <label class="quiz-opt"><input type="radio" name="m3" value="b"> b) 15h + 20</label>
+                    <label class="quiz-opt"><input type="radio" name="m3" value="c"> c) 15 + 20 + h</label>
+                    <label class="quiz-opt"><input type="radio" name="m3" value="d"> d) 15h − 20</label>
+                </div>
+                <div class="quiz-q">
+                    <p>4. Usando a expressão do serviço da oficina (15h + 20), quanto custará um serviço de 4 horas?</p>
+                    <label class="quiz-opt"><input type="radio" name="m4" value="a"> a) R$60,00</label>
+                    <label class="quiz-opt"><input type="radio" name="m4" value="b"> b) R$80,00</label>
+                    <label class="quiz-opt"><input type="radio" name="m4" value="c"> c) R$95,00</label>
+                    <label class="quiz-opt"><input type="radio" name="m4" value="d"> d) R$100,00</label>
+                </div>
+                <div class="quiz-q">
+                    <p>5. Simplifique a expressão: 20a + 7 − 14a + 5</p>
+                    <label class="quiz-opt"><input type="radio" name="m5" value="a"> a) 6a + 12</label>
+                    <label class="quiz-opt"><input type="radio" name="m5" value="b"> b) 34a + 12</label>
+                    <label class="quiz-opt"><input type="radio" name="m5" value="c"> c) 6a + 2</label>
+                    <label class="quiz-opt"><input type="radio" name="m5" value="d"> d) 20a + 12</label>
+                </div>
+                <div class="quiz-q">
+                    <p>6. Simplifique a expressão: 12a − 5b + 6a + 2b − 3</p>
+                    <label class="quiz-opt"><input type="radio" name="m6" value="a"> a) 18a − 3b − 3</label>
+                    <label class="quiz-opt"><input type="radio" name="m6" value="b"> b) 6a − 7b − 3</label>
+                    <label class="quiz-opt"><input type="radio" name="m6" value="c"> c) 18a + 7b − 3</label>
+                    <label class="quiz-opt"><input type="radio" name="m6" value="d"> d) 12a − 5b + 3</label>
+                </div>
+                <div class="quiz-q">
+                    <p>7. Na sequência 5, 10, 15, 20, ..., qual é o próximo número?</p>
+                    <label class="quiz-opt"><input type="radio" name="m7" value="a"> a) 25</label>
+                    <label class="quiz-opt"><input type="radio" name="m7" value="b"> b) 22</label>
+                    <label class="quiz-opt"><input type="radio" name="m7" value="c"> c) 30</label>
+                    <label class="quiz-opt"><input type="radio" name="m7" value="d"> d) 24</label>
+                </div>
+                <div class="quiz-q">
+                    <p>8. Como descobrimos a lei de formação de uma sequência numérica?</p>
+                    <label class="quiz-opt"><input type="radio" name="m8" value="a"> a) Observando o padrão de repetição entre os termos</label>
+                    <label class="quiz-opt"><input type="radio" name="m8" value="b"> b) Multiplicando o primeiro termo por 100</label>
+                    <label class="quiz-opt"><input type="radio" name="m8" value="c"> c) Somando todos os termos e dividindo por 2</label>
+                    <label class="quiz-opt"><input type="radio" name="m8" value="d"> d) Não é possível descobrir</label>
+                </div>
+                <div class="quiz-q">
+                    <p>9. Qual é a fórmula do volume de um paralelepípedo (bloco retangular)?</p>
+                    <label class="quiz-opt"><input type="radio" name="m9" value="a"> a) V = comprimento × largura × altura</label>
+                    <label class="quiz-opt"><input type="radio" name="m9" value="b"> b) V = comprimento + largura + altura</label>
+                    <label class="quiz-opt"><input type="radio" name="m9" value="c"> c) V = comprimento × largura</label>
+                    <label class="quiz-opt"><input type="radio" name="m9" value="d"> d) V = 2 × (comprimento + largura)</label>
+                </div>
+                <div class="quiz-q">
+                    <p>10. Resolva a equação: x − 8 = 15. Qual é o valor de x?</p>
+                    <label class="quiz-opt"><input type="radio" name="m10" value="a"> a) x = 7</label>
+                    <label class="quiz-opt"><input type="radio" name="m10" value="b"> b) x = 23</label>
+                    <label class="quiz-opt"><input type="radio" name="m10" value="c"> c) x = 15</label>
+                    <label class="quiz-opt"><input type="radio" name="m10" value="d"> d) x = 20</label>
+                </div>
+                <button type="button" class="corrigir-btn" onclick="corrigirProva('matematica2', {m1:'b',m2:'c',m3:'b',m4:'c',m5:'a',m6:'a',m7:'a',m8:'a',m9:'a',m10:'b'})">✅ Corrigir prova</button>
+                <div class="prova-resultado" id="resultado-matematica2"></div>
+            </form>
+        </div>
+
+        <!-- GEOGRAFIA 2 -->
+        <div class="prova-panel" id="painel-prova-geografia2">
+            <h3>🌎 Geografia 2</h3>
+            <span class="capitulo-ref">Baseado no conteúdo: Transporte, Agricultura e População</span>
+            <form id="prova-geografia2">
+                <div class="quiz-q">
+                    <p>1. O transporte hidroviário é mais utilizado no Brasil principalmente na região:</p>
+                    <label class="quiz-opt"><input type="radio" name="g1" value="a"> a) Norte, por causa dos grandes rios como o Amazonas</label>
+                    <label class="quiz-opt"><input type="radio" name="g1" value="b"> b) Sul, por causa das montanhas</label>
+                    <label class="quiz-opt"><input type="radio" name="g1" value="c"> c) Nordeste, por causa do clima seco</label>
+                    <label class="quiz-opt"><input type="radio" name="g1" value="d"> d) Centro-Oeste, por causa do cerrado</label>
+                </div>
+                <div class="quiz-q">
+                    <p>2. Uma vantagem do transporte rodoviário em relação aos outros modais é:</p>
+                    <label class="quiz-opt"><input type="radio" name="g2" value="a"> a) A flexibilidade de chegar a quase qualquer lugar com estrada</label>
+                    <label class="quiz-opt"><input type="radio" name="g2" value="b"> b) O menor custo para longas distâncias</label>
+                    <label class="quiz-opt"><input type="radio" name="g2" value="c"> c) A ausência total de poluição</label>
+                    <label class="quiz-opt"><input type="radio" name="g2" value="d"> d) A impossibilidade de engarrafamentos</label>
+                </div>
+                <div class="quiz-q">
+                    <p>3. A agricultura de subsistência se diferencia da agricultura comercial porque:</p>
+                    <label class="quiz-opt"><input type="radio" name="g3" value="a"> a) É voltada ao consumo da própria família, e não à venda</label>
+                    <label class="quiz-opt"><input type="radio" name="g3" value="b"> b) Usa sempre máquinas modernas</label>
+                    <label class="quiz-opt"><input type="radio" name="g3" value="c"> c) É proibida por lei no Brasil</label>
+                    <label class="quiz-opt"><input type="radio" name="g3" value="d"> d) Só existe em outros países</label>
+                </div>
+                <div class="quiz-q">
+                    <p>4. O agronegócio (agricultura comercial em larga escala) é caracterizado por:</p>
+                    <label class="quiz-opt"><input type="radio" name="g4" value="a"> a) Pequenas hortas para consumo familiar</label>
+                    <label class="quiz-opt"><input type="radio" name="g4" value="b"> b) Grandes propriedades, uso de tecnologia e produção voltada à exportação</label>
+                    <label class="quiz-opt"><input type="radio" name="g4" value="c"> c) Ausência total de máquinas</label>
+                    <label class="quiz-opt"><input type="radio" name="g4" value="d"> d) Produção exclusiva de flores ornamentais</label>
+                </div>
+                <div class="quiz-q">
+                    <p>5. Uma região com alta densidade demográfica é aquela que tem:</p>
+                    <label class="quiz-opt"><input type="radio" name="g5" value="a"> a) Muitos habitantes em relação à sua área territorial</label>
+                    <label class="quiz-opt"><input type="radio" name="g5" value="b"> b) Poucos habitantes espalhados por uma grande área</label>
+                    <label class="quiz-opt"><input type="radio" name="g5" value="c"> c) Nenhum habitante fixo</label>
+                    <label class="quiz-opt"><input type="radio" name="g5" value="d"> d) Somente população rural</label>
+                </div>
+                <div class="quiz-q">
+                    <p>6. O transporte aéreo é geralmente escolhido quando se precisa de:</p>
+                    <label class="quiz-opt"><input type="radio" name="g6" value="a"> a) Rapidez para longas distâncias, apesar do custo mais alto</label>
+                    <label class="quiz-opt"><input type="radio" name="g6" value="b"> b) O menor custo possível por tonelada transportada</label>
+                    <label class="quiz-opt"><input type="radio" name="g6" value="c"> c) Transportar cargas muito pesadas com baixo custo</label>
+                    <label class="quiz-opt"><input type="radio" name="g6" value="d"> d) Evitar totalmente aeroportos</label>
+                </div>
+                <div class="quiz-q">
+                    <p>7. O êxodo rural é o processo em que:</p>
+                    <label class="quiz-opt"><input type="radio" name="g7" value="a"> a) Pessoas saem do campo para viver nas cidades</label>
+                    <label class="quiz-opt"><input type="radio" name="g7" value="b"> b) Pessoas saem das cidades para viver no campo</label>
+                    <label class="quiz-opt"><input type="radio" name="g7" value="c"> c) As cidades param de crescer</label>
+                    <label class="quiz-opt"><input type="radio" name="g7" value="d"> d) A agricultura substitui totalmente a indústria</label>
+                </div>
+                <div class="quiz-q">
+                    <p>8. No Brasil, a população se concentra principalmente:</p>
+                    <label class="quiz-opt"><input type="radio" name="g8" value="a"> a) De forma totalmente uniforme em todo o território</label>
+                    <label class="quiz-opt"><input type="radio" name="g8" value="b"> b) Próxima ao litoral e nas grandes regiões metropolitanas</label>
+                    <label class="quiz-opt"><input type="radio" name="g8" value="c"> c) Somente na região Norte</label>
+                    <label class="quiz-opt"><input type="radio" name="g8" value="d"> d) Somente em áreas rurais</label>
+                </div>
+                <div class="quiz-q">
+                    <p>9. Uma característica típica da zona rural é:</p>
+                    <label class="quiz-opt"><input type="radio" name="g9" value="a"> a) Presença de plantações, criação de animais e baixa concentração de construções</label>
+                    <label class="quiz-opt"><input type="radio" name="g9" value="b"> b) Grande número de prédios e indústrias</label>
+                    <label class="quiz-opt"><input type="radio" name="g9" value="c"> c) Ausência total de qualquer atividade</label>
+                    <label class="quiz-opt"><input type="radio" name="g9" value="d"> d) Presença exclusiva de shoppings</label>
+                </div>
+                <div class="quiz-q">
+                    <p>10. A urbanização desordenada, sem planejamento adequado, costuma resultar em:</p>
+                    <label class="quiz-opt"><input type="radio" name="g10" value="a"> a) Formação de favelas e problemas de infraestrutura</label>
+                    <label class="quiz-opt"><input type="radio" name="g10" value="b"> b) Melhoria automática da qualidade de vida</label>
+                    <label class="quiz-opt"><input type="radio" name="g10" value="c"> c) Redução do número de moradores nas cidades</label>
+                    <label class="quiz-opt"><input type="radio" name="g10" value="d"> d) Aumento da agricultura de subsistência</label>
+                </div>
+                <button type="button" class="corrigir-btn" onclick="corrigirProva('geografia2', {g1:'a',g2:'a',g3:'a',g4:'b',g5:'a',g6:'a',g7:'a',g8:'b',g9:'a',g10:'a'})">✅ Corrigir prova</button>
+                <div class="prova-resultado" id="resultado-geografia2"></div>
+            </form>
+        </div>
+
+        <!-- INGLÊS 2 -->
+        <div class="prova-panel" id="painel-prova-ingles2">
+            <h3>🇬🇧 Inglês 2</h3>
+            <span class="capitulo-ref">Baseado no conteúdo: Simple Past (verb to be, regular verbs e seus significados: be, want, wait, decide, walk, check, stop, turn, phone, make) e Famous People</span>
+            <form id="prova-ingles2">
+                <div class="quiz-q">
+                    <p>1. Qual frase está corretamente no Simple Past?</p>
+                    <label class="quiz-opt"><input type="radio" name="ing1" value="a"> a) She walks to school yesterday</label>
+                    <label class="quiz-opt"><input type="radio" name="ing1" value="b"> b) She walked to school yesterday</label>
+                    <label class="quiz-opt"><input type="radio" name="ing1" value="c"> c) She walking to school yesterday</label>
+                    <label class="quiz-opt"><input type="radio" name="ing1" value="d"> d) She will walk to school yesterday</label>
+                </div>
+                <div class="quiz-q">
+                    <p>2. No Simple Past, o verbo "to be" para we / you / they fica:</p>
+                    <label class="quiz-opt"><input type="radio" name="ing2" value="a"> a) was</label>
+                    <label class="quiz-opt"><input type="radio" name="ing2" value="b"> b) were</label>
+                    <label class="quiz-opt"><input type="radio" name="ing2" value="c"> c) is</label>
+                    <label class="quiz-opt"><input type="radio" name="ing2" value="d"> d) am</label>
+                </div>
+                <div class="quiz-q">
+                    <p>3. Qual é o Simple Past do verbo regular "to stop"?</p>
+                    <label class="quiz-opt"><input type="radio" name="ing3" value="a"> a) stoped</label>
+                    <label class="quiz-opt"><input type="radio" name="ing3" value="b"> b) stopped</label>
+                    <label class="quiz-opt"><input type="radio" name="ing3" value="c"> c) stopeded</label>
+                    <label class="quiz-opt"><input type="radio" name="ing3" value="d"> d) stoping</label>
+                </div>
+                <div class="quiz-q">
+                    <p>4. Qual é o significado do verbo "to turn" e o seu Simple Past?</p>
+                    <label class="quiz-opt"><input type="radio" name="ing4" value="a"> a) Virar/girar — turned</label>
+                    <label class="quiz-opt"><input type="radio" name="ing4" value="b"> b) Telefonar — phoned</label>
+                    <label class="quiz-opt"><input type="radio" name="ing4" value="c"> c) Andar — walked</label>
+                    <label class="quiz-opt"><input type="radio" name="ing4" value="d"> d) Querer — wanted</label>
+                </div>
+                <div class="quiz-q">
+                    <p>5. Qual frase usa "want" corretamente no Simple Past?</p>
+                    <label class="quiz-opt"><input type="radio" name="ing5" value="a"> a) I wanted to travel last year</label>
+                    <label class="quiz-opt"><input type="radio" name="ing5" value="b"> b) I want to travel last year</label>
+                    <label class="quiz-opt"><input type="radio" name="ing5" value="c"> c) I wanting to travel last year</label>
+                    <label class="quiz-opt"><input type="radio" name="ing5" value="d"> d) I wants to travel last year</label>
+                </div>
+                <div class="quiz-q">
+                    <p>6. Who was Albert Einstein?</p>
+                    <label class="quiz-opt"><input type="radio" name="ing6" value="a"> a) A German-born physicist</label>
+                    <label class="quiz-opt"><input type="radio" name="ing6" value="b"> b) A Brazilian singer</label>
+                    <label class="quiz-opt"><input type="radio" name="ing6" value="c"> c) An English writer</label>
+                    <label class="quiz-opt"><input type="radio" name="ing6" value="d"> d) A Mexican painter</label>
+                </div>
+                <div class="quiz-q">
+                    <p>7. Who was Nelson Mandela?</p>
+                    <label class="quiz-opt"><input type="radio" name="ing7" value="a"> a) A South African civil rights leader and president</label>
+                    <label class="quiz-opt"><input type="radio" name="ing7" value="b"> b) An American aviator</label>
+                    <label class="quiz-opt"><input type="radio" name="ing7" value="c"> c) A Polish scientist</label>
+                    <label class="quiz-opt"><input type="radio" name="ing7" value="d"> d) A Mexican painter</label>
+                </div>
+                <div class="quiz-q">
+                    <p>8. Who was Anne Frank?</p>
+                    <label class="quiz-opt"><input type="radio" name="ing8" value="a"> a) A German diarist during World War II</label>
+                    <label class="quiz-opt"><input type="radio" name="ing8" value="b"> b) An English queen</label>
+                    <label class="quiz-opt"><input type="radio" name="ing8" value="c"> c) A Brazilian painter</label>
+                    <label class="quiz-opt"><input type="radio" name="ing8" value="d"> d) An Indian prime minister</label>
+                </div>
+                <div class="quiz-q">
+                    <p>9. Who was Martin Luther King Jr.?</p>
+                    <label class="quiz-opt"><input type="radio" name="ing9" value="a"> a) An American civil rights leader</label>
+                    <label class="quiz-opt"><input type="radio" name="ing9" value="b"> b) A Brazilian singer</label>
+                    <label class="quiz-opt"><input type="radio" name="ing9" value="c"> c) A Polish scientist</label>
+                    <label class="quiz-opt"><input type="radio" name="ing9" value="d"> d) A Mexican painter</label>
+                </div>
+                <div class="quiz-q">
+                    <p>10. Complete: "Last week, John ___ (want) to phone his cousin and ___ (check) the news."</p>
+                    <label class="quiz-opt"><input type="radio" name="ing10" value="a"> a) wants / checks</label>
+                    <label class="quiz-opt"><input type="radio" name="ing10" value="b"> b) wanted / checked</label>
+                    <label class="quiz-opt"><input type="radio" name="ing10" value="c"> c) wanting / checking</label>
+                    <label class="quiz-opt"><input type="radio" name="ing10" value="d"> d) want / check</label>
+                </div>
+                <button type="button" class="corrigir-btn" onclick="corrigirProva('ingles2', {ing1:'b',ing2:'b',ing3:'b',ing4:'a',ing5:'a',ing6:'a',ing7:'a',ing8:'a',ing9:'a',ing10:'b'})">✅ Corrigir prova</button>
+                <div class="prova-resultado" id="resultado-ingles2"></div>
+            </form>
+        </div>
+
+        <!-- ARTES 2 -->
+        <div class="prova-panel" id="painel-prova-artes2">
+            <h3>🎨 Artes 2</h3>
+            <span class="capitulo-ref">Baseado no conteúdo: Arte Indígena e Barroco</span>
+            <form id="prova-artes2">
+                <div class="quiz-q">
+                    <p>1. A cestaria indígena é um tipo de arte feita principalmente com:</p>
+                    <label class="quiz-opt"><input type="radio" name="art1" value="a"> a) Fibras vegetais, trançadas para formar cestos e outros objetos</label>
+                    <label class="quiz-opt"><input type="radio" name="art1" value="b"> b) Metais preciosos importados</label>
+                    <label class="quiz-opt"><input type="radio" name="art1" value="c"> c) Tinta a óleo sobre madeira</label>
+                    <label class="quiz-opt"><input type="radio" name="art1" value="d"> d) Vitrais coloridos</label>
+                </div>
+                <div class="quiz-q">
+                    <p>2. A arte indígena costuma transmitir, através de seus objetos e grafismos:</p>
+                    <label class="quiz-opt"><input type="radio" name="art2" value="a"> a) Crenças, mitos e a relação do povo com a natureza</label>
+                    <label class="quiz-opt"><input type="radio" name="art2" value="b"> b) Apenas propaganda comercial</label>
+                    <label class="quiz-opt"><input type="radio" name="art2" value="c"> c) Notícias do jornal da época</label>
+                    <label class="quiz-opt"><input type="radio" name="art2" value="d"> d) Nenhum significado especial</label>
+                </div>
+                <div class="quiz-q">
+                    <p>3. O período em que o estilo Barroco predominou na arte do Brasil Colonial está ligado principalmente:</p>
+                    <label class="quiz-opt"><input type="radio" name="art3" value="a"> a) Ao ciclo do ouro em Minas Gerais</label>
+                    <label class="quiz-opt"><input type="radio" name="art3" value="b"> b) À chegada da família real ao Japão</label>
+                    <label class="quiz-opt"><input type="radio" name="art3" value="c"> c) À Revolução Industrial</label>
+                    <label class="quiz-opt"><input type="radio" name="art3" value="d"> d) À independência dos Estados Unidos</label>
+                </div>
+                <div class="quiz-q">
+                    <p>4. Nas esculturas e pinturas barrocas, o uso forte de dourado e ornamentos tinha o objetivo de:</p>
+                    <label class="quiz-opt"><input type="radio" name="art4" value="a"> a) Impressionar e emocionar quem observava, reforçando a fé</label>
+                    <label class="quiz-opt"><input type="radio" name="art4" value="b"> b) Economizar material</label>
+                    <label class="quiz-opt"><input type="radio" name="art4" value="c"> c) Deixar a obra o mais simples possível</label>
+                    <label class="quiz-opt"><input type="radio" name="art4" value="d"> d) Copiar exatamente a arte indígena</label>
+                </div>
+                <div class="quiz-q">
+                    <p>5. A cidade de Ouro Preto (MG) é conhecida por ser um importante centro:</p>
+                    <label class="quiz-opt"><input type="radio" name="art5" value="a"> a) Da arquitetura e da arte barroca no Brasil</label>
+                    <label class="quiz-opt"><input type="radio" name="art5" value="b"> b) Da arte moderna abstrata</label>
+                    <label class="quiz-opt"><input type="radio" name="art5" value="c"> c) Da arte indígena marajoara</label>
+                    <label class="quiz-opt"><input type="radio" name="art5" value="d"> d) Do cinema brasileiro</label>
+                </div>
+                <div class="quiz-q">
+                    <p>6. Além de escultor, Aleijadinho também atuou como:</p>
+                    <label class="quiz-opt"><input type="radio" name="art6" value="a"> a) Arquiteto e entalhador</label>
+                    <label class="quiz-opt"><input type="radio" name="art6" value="b"> b) Poeta</label>
+                    <label class="quiz-opt"><input type="radio" name="art6" value="c"> c) Músico</label>
+                    <label class="quiz-opt"><input type="radio" name="art6" value="d"> d) Jornalista</label>
+                </div>
+                <div class="quiz-q">
+                    <p>7. Os rituais indígenas costumam utilizar objetos de arte, como cocares e colares, principalmente para:</p>
+                    <label class="quiz-opt"><input type="radio" name="art7" value="a"> a) Marcar cerimônias, festas e momentos importantes da cultura do povo</label>
+                    <label class="quiz-opt"><input type="radio" name="art7" value="b"> b) Uso exclusivamente comercial</label>
+                    <label class="quiz-opt"><input type="radio" name="art7" value="c"> c) Decoração sem nenhum significado</label>
+                    <label class="quiz-opt"><input type="radio" name="art7" value="d"> d) Substituir moedas em trocas comerciais</label>
+                </div>
+                <div class="quiz-q">
+                    <p>8. As esculturas dos "Profetas de Congonhas", de Aleijadinho, são feitas em:</p>
+                    <label class="quiz-opt"><input type="radio" name="art8" value="a"> a) Pedra-sabão</label>
+                    <label class="quiz-opt"><input type="radio" name="art8" value="b"> b) Vidro</label>
+                    <label class="quiz-opt"><input type="radio" name="art8" value="c"> c) Plástico</label>
+                    <label class="quiz-opt"><input type="radio" name="art8" value="d"> d) Ferro fundido</label>
+                </div>
+                <div class="quiz-q">
+                    <p>9. Um dos principais materiais usados na arte plumária indígena são:</p>
+                    <label class="quiz-opt"><input type="radio" name="art9" value="a"> a) Penas coloridas de aves</label>
+                    <label class="quiz-opt"><input type="radio" name="art9" value="b"> b) Placas de metal</label>
+                    <label class="quiz-opt"><input type="radio" name="art9" value="c"> c) Azulejos portugueses</label>
+                    <label class="quiz-opt"><input type="radio" name="art9" value="d"> d) Concreto</label>
+                </div>
+                <div class="quiz-q">
+                    <p>10. A talha (esculturas em madeira dourada) dentro das igrejas barrocas era usada principalmente para:</p>
+                    <label class="quiz-opt"><input type="radio" name="art10" value="a"> a) Decorar altares e capelas com riqueza de detalhes</label>
+                    <label class="quiz-opt"><input type="radio" name="art10" value="b"> b) Servir de assento para os fiéis</label>
+                    <label class="quiz-opt"><input type="radio" name="art10" value="c"> c) Cobrir o chão das igrejas</label>
+                    <label class="quiz-opt"><input type="radio" name="art10" value="d"> d) Substituir os sinos</label>
+                </div>
+                <button type="button" class="corrigir-btn" onclick="corrigirProva('artes2', {art1:'a',art2:'a',art3:'a',art4:'a',art5:'a',art6:'a',art7:'a',art8:'a',art9:'a',art10:'a'})">✅ Corrigir prova</button>
+                <div class="prova-resultado" id="resultado-artes2"></div>
+            </form>
+        </div>
+
+        <!-- CIÊNCIAS 2 -->
+        <div class="prova-panel" id="painel-prova-ciencias2">
+            <h3>🧪 Ciências 2</h3>
+            <span class="capitulo-ref">Baseado no conteúdo: Cadeia Alimentar e Calor</span>
+            <form id="prova-ciencias2">
+                <div class="quiz-q">
+                    <p>1. Os seres herbívoros, na cadeia alimentar, são consumidores que:</p>
+                    <label class="quiz-opt"><input type="radio" name="c1" value="a"> a) Se alimentam exclusivamente de plantas</label>
+                    <label class="quiz-opt"><input type="radio" name="c1" value="b"> b) Fazem fotossíntese</label>
+                    <label class="quiz-opt"><input type="radio" name="c1" value="c"> c) Decompõem matéria orgânica</label>
+                    <label class="quiz-opt"><input type="radio" name="c1" value="d"> d) Se alimentam apenas de outros animais</label>
+                </div>
+                <div class="quiz-q">
+                    <p>2. Os seres carnívoros, na cadeia alimentar, são consumidores que:</p>
+                    <label class="quiz-opt"><input type="radio" name="c2" value="a"> a) Se alimentam de plantas</label>
+                    <label class="quiz-opt"><input type="radio" name="c2" value="b"> b) Se alimentam de outros animais</label>
+                    <label class="quiz-opt"><input type="radio" name="c2" value="c"> c) Produzem seu próprio alimento</label>
+                    <label class="quiz-opt"><input type="radio" name="c2" value="d"> d) Reciclam nutrientes do solo</label>
+                </div>
+                <div class="quiz-q">
+                    <p>3. Sem os decompositores, um ecossistema teria como principal problema:</p>
+                    <label class="quiz-opt"><input type="radio" name="c3" value="a"> a) O acúmulo de matéria orgânica morta, sem reciclagem de nutrientes</label>
+                    <label class="quiz-opt"><input type="radio" name="c3" value="b"> b) Excesso de oxigênio na atmosfera</label>
+                    <label class="quiz-opt"><input type="radio" name="c3" value="c"> c) Falta de água nos rios</label>
+                    <label class="quiz-opt"><input type="radio" name="c3" value="d"> d) Nenhum problema, pois eles não são importantes</label>
+                </div>
+                <div class="quiz-q">
+                    <p>4. Quando colocamos a mão em um copo de água quente, sentimos calor porque:</p>
+                    <label class="quiz-opt"><input type="radio" name="c4" value="a"> a) A água transfere energia térmica para a nossa mão</label>
+                    <label class="quiz-opt"><input type="radio" name="c4" value="b"> b) A água rouba frio da nossa mão</label>
+                    <label class="quiz-opt"><input type="radio" name="c4" value="c"> c) Não existe transferência de energia</label>
+                    <label class="quiz-opt"><input type="radio" name="c4" value="d"> d) A água é um isolante térmico perfeito</label>
+                </div>
+                <div class="quiz-q">
+                    <p>5. Um material condutor de calor é aquele que:</p>
+                    <label class="quiz-opt"><input type="radio" name="c5" value="a"> a) Permite que o calor passe facilmente através dele, como os metais</label>
+                    <label class="quiz-opt"><input type="radio" name="c5" value="b"> b) Impede totalmente a passagem de calor</label>
+                    <label class="quiz-opt"><input type="radio" name="c5" value="c"> c) Só existe em líquidos</label>
+                    <label class="quiz-opt"><input type="radio" name="c5" value="d"> d) É sempre transparente</label>
+                </div>
+                <div class="quiz-q">
+                    <p>6. Se retirarmos os produtores de uma cadeia alimentar, o que provavelmente acontece?</p>
+                    <label class="quiz-opt"><input type="radio" name="c6" value="a"> a) Toda a cadeia é afetada, pois eles são a base de energia do ecossistema</label>
+                    <label class="quiz-opt"><input type="radio" name="c6" value="b"> b) Nada muda, pois eles não são importantes</label>
+                    <label class="quiz-opt"><input type="radio" name="c6" value="c"> c) Apenas os decompositores são afetados</label>
+                    <label class="quiz-opt"><input type="radio" name="c6" value="d"> d) A cadeia alimentar fica mais forte</label>
+                </div>
+                <div class="quiz-q">
+                    <p>7. Um material isolante térmico é aquele que:</p>
+                    <label class="quiz-opt"><input type="radio" name="c7" value="a"> a) Dificulta a passagem do calor, como a cortiça e a lã</label>
+                    <label class="quiz-opt"><input type="radio" name="c7" value="b"> b) Facilita totalmente a passagem do calor</label>
+                    <label class="quiz-opt"><input type="radio" name="c7" value="c"> c) Só existe em metais</label>
+                    <label class="quiz-opt"><input type="radio" name="c7" value="d"> d) É sempre líquido</label>
+                </div>
+                <div class="quiz-q">
+                    <p>8. A unidade de medida mais usada para a temperatura no Brasil é:</p>
+                    <label class="quiz-opt"><input type="radio" name="c8" value="a"> a) Grau Celsius (°C)</label>
+                    <label class="quiz-opt"><input type="radio" name="c8" value="b"> b) Metro (m)</label>
+                    <label class="quiz-opt"><input type="radio" name="c8" value="c"> c) Quilograma (kg)</label>
+                    <label class="quiz-opt"><input type="radio" name="c8" value="d"> d) Litro (L)</label>
+                </div>
+                <div class="quiz-q">
+                    <p>9. Uma população, em Ciências, é definida como:</p>
+                    <label class="quiz-opt"><input type="radio" name="c9" value="a"> a) O conjunto de indivíduos da mesma espécie vivendo em uma área</label>
+                    <label class="quiz-opt"><input type="radio" name="c9" value="b"> b) Apenas um único indivíduo</label>
+                    <label class="quiz-opt"><input type="radio" name="c9" value="c"> c) Um conjunto de espécies diferentes sem relação</label>
+                    <label class="quiz-opt"><input type="radio" name="c9" value="d"> d) O clima de uma região</label>
+                </div>
+                <div class="quiz-q">
+                    <p>10. Uma comunidade, em Ciências, é definida como:</p>
+                    <label class="quiz-opt"><input type="radio" name="c10" value="a"> a) O conjunto de todas as populações de espécies diferentes vivendo numa mesma área</label>
+                    <label class="quiz-opt"><input type="radio" name="c10" value="b"> b) Apenas uma espécie isolada</label>
+                    <label class="quiz-opt"><input type="radio" name="c10" value="c"> c) O local físico onde os seres vivem</label>
+                    <label class="quiz-opt"><input type="radio" name="c10" value="d"> d) Somente os fatores abióticos de um ambiente</label>
+                </div>
+                <button type="button" class="corrigir-btn" onclick="corrigirProva('ciencias2', {c1:'a',c2:'b',c3:'a',c4:'a',c5:'a',c6:'a',c7:'a',c8:'a',c9:'a',c10:'a'})">✅ Corrigir prova</button>
+                <div class="prova-resultado" id="resultado-ciencias2"></div>
+            </form>
+        </div>
+
+        <!-- HISTÓRIA 2 -->
+        <div class="prova-panel" id="painel-prova-historia2">
+            <h3>🏛️ História 2</h3>
+            <span class="capitulo-ref">Baseado no Capítulo 4 — "Reformas religiosas"</span>
+            <form id="prova-historia2">
+                <div class="quiz-q">
+                    <p>1. Martinho Lutero fixou suas 95 teses na porta de uma igreja em qual cidade?</p>
+                    <label class="quiz-opt"><input type="radio" name="h1" value="a"> a) Roma</label>
+                    <label class="quiz-opt"><input type="radio" name="h1" value="b"> b) Wittenberg</label>
+                    <label class="quiz-opt"><input type="radio" name="h1" value="c"> c) Londres</label>
+                    <label class="quiz-opt"><input type="radio" name="h1" value="d"> d) Paris</label>
+                </div>
+                <div class="quiz-q">
+                    <p>2. O Calvinismo, entre outras ideias, defendia a chamada "predestinação", segundo a qual:</p>
+                    <label class="quiz-opt"><input type="radio" name="h2" value="a"> a) Deus já teria decidido, previamente, quem seria salvo</label>
+                    <label class="quiz-opt"><input type="radio" name="h2" value="b"> b) Qualquer pessoa poderia comprar sua salvação</label>
+                    <label class="quiz-opt"><input type="radio" name="h2" value="c"> c) Não existia vida após a morte</label>
+                    <label class="quiz-opt"><input type="radio" name="h2" value="d"> d) Somente o Papa poderia ser salvo</label>
+                </div>
+                <div class="quiz-q">
+                    <p>3. O rei Henrique VIII rompeu com a Igreja Católica principalmente porque:</p>
+                    <label class="quiz-opt"><input type="radio" name="h3" value="a"> a) O Papa não autorizou a anulação de seu casamento</label>
+                    <label class="quiz-opt"><input type="radio" name="h3" value="b"> b) Ele era seguidor de Calvino</label>
+                    <label class="quiz-opt"><input type="radio" name="h3" value="c"> c) Ele queria unificar a Alemanha</label>
+                    <label class="quiz-opt"><input type="radio" name="h3" value="d"> d) A Igreja proibiu o comércio inglês</label>
+                </div>
+                <div class="quiz-q">
+                    <p>4. O conjunto de medidas tomadas pela Igreja Católica para responder à Reforma Protestante é chamado de:</p>
+                    <label class="quiz-opt"><input type="radio" name="h4" value="a"> a) Iluminismo</label>
+                    <label class="quiz-opt"><input type="radio" name="h4" value="b"> b) Contrarreforma</label>
+                    <label class="quiz-opt"><input type="radio" name="h4" value="c"> c) Renascimento</label>
+                    <label class="quiz-opt"><input type="radio" name="h4" value="d"> d) Absolutismo</label>
+                </div>
+                <div class="quiz-q">
+                    <p>5. A Reforma Protestante teve início oficialmente no ano de:</p>
+                    <label class="quiz-opt"><input type="radio" name="h5" value="a"> a) 1500</label>
+                    <label class="quiz-opt"><input type="radio" name="h5" value="b"> b) 1517</label>
+                    <label class="quiz-opt"><input type="radio" name="h5" value="c"> c) 1545</label>
+                    <label class="quiz-opt"><input type="radio" name="h5" value="d"> d) 1600</label>
+                </div>
+                <div class="quiz-q">
+                    <p>6. Uma das principais críticas de Lutero à Igreja Católica era em relação:</p>
+                    <label class="quiz-opt"><input type="radio" name="h6" value="a"> a) À venda de indulgências</label>
+                    <label class="quiz-opt"><input type="radio" name="h6" value="b"> b) Ao uso do latim nas ciências</label>
+                    <label class="quiz-opt"><input type="radio" name="h6" value="c"> c) À existência de reis na Europa</label>
+                    <label class="quiz-opt"><input type="radio" name="h6" value="d"> d) Ao comércio marítimo</label>
+                </div>
+                <div class="quiz-q">
+                    <p>7. A Companhia de Jesus (jesuítas) foi fundada por:</p>
+                    <label class="quiz-opt"><input type="radio" name="h7" value="a"> a) Inácio de Loyola</label>
+                    <label class="quiz-opt"><input type="radio" name="h7" value="b"> b) Martinho Lutero</label>
+                    <label class="quiz-opt"><input type="radio" name="h7" value="c"> c) João Calvino</label>
+                    <label class="quiz-opt"><input type="radio" name="h7" value="d"> d) Henrique VIII</label>
+                </div>
+                <div class="quiz-q">
+                    <p>8. No Brasil colonial, os jesuítas atuaram principalmente:</p>
+                    <label class="quiz-opt"><input type="radio" name="h8" value="a"> a) Na catequese e educação dos povos indígenas</label>
+                    <label class="quiz-opt"><input type="radio" name="h8" value="b"> b) No comércio de especiarias com a Ásia</label>
+                    <label class="quiz-opt"><input type="radio" name="h8" value="c"> c) Na mineração de ouro</label>
+                    <label class="quiz-opt"><input type="radio" name="h8" value="d"> d) Na construção de estradas de ferro</label>
+                </div>
+                <div class="quiz-q">
+                    <p>9. O Concílio de Trento foi realizado entre os anos de:</p>
+                    <label class="quiz-opt"><input type="radio" name="h9" value="a"> a) 1545 e 1563</label>
+                    <label class="quiz-opt"><input type="radio" name="h9" value="b"> b) 1789 e 1799</label>
+                    <label class="quiz-opt"><input type="radio" name="h9" value="c"> c) 1900 e 1910</label>
+                    <label class="quiz-opt"><input type="radio" name="h9" value="d"> d) 1300 e 1310</label>
+                </div>
+                <div class="quiz-q">
+                    <p>10. Uma consequência da divisão religiosa provocada pela Reforma foi:</p>
+                    <label class="quiz-opt"><input type="radio" name="h10" value="a"> a) O surgimento de conflitos e guerras religiosas na Europa</label>
+                    <label class="quiz-opt"><input type="radio" name="h10" value="b"> b) O fim total de qualquer religião na Europa</label>
+                    <label class="quiz-opt"><input type="radio" name="h10" value="c"> c) A unificação imediata de todas as igrejas</label>
+                    <label class="quiz-opt"><input type="radio" name="h10" value="d"> d) A criação do Islamismo</label>
+                </div>
+                <button type="button" class="corrigir-btn" onclick="corrigirProva('historia2', {h1:'b',h2:'a',h3:'a',h4:'b',h5:'b',h6:'a',h7:'a',h8:'a',h9:'a',h10:'a'})">✅ Corrigir prova</button>
+                <div class="prova-resultado" id="resultado-historia2"></div>
+            </form>
+        </div>
+
+    
 
     </div>
 </div>
@@ -4601,7 +5127,7 @@ function irParaSuperProva() {
 
 // Corrige uma prova: recebe o id da matéria e um objeto {pergunta: respostaCorreta}
 // Mapeia o prefixo de cada pergunta do Provão para a matéria correspondente
-const prefixoParaMateria = { p: 'portugues', m: 'matematica', g: 'geografia', c: 'ciencias', h: 'historia' };
+const prefixoParaMateria = { p: 'portugues', m: 'matematica', g: 'geografia', c: 'ciencias', h: 'historia', t: 'producaotextual' };
 
 // ===== CONFETES (comemoração para notas acima de 8) =====
 function dispararConfetes(){
@@ -5119,6 +5645,15 @@ const materiaisEscritos = {
             <li><b>Tópicos de apoio:</b> cerâmica marajoara, cestaria e grafismos indígenas, igrejas barrocas, esculturas de Aleijadinho.</li>
             <li><b>Sugestão:</b> revisar junto com o capítulo de Reformas Religiosas de História, já que o Barroco surge nesse mesmo contexto.</li>
         </ul>
+    `,
+    'Produção Textual': `
+        <h4>📄 Materiais — Produção Textual</h4>
+        <ul>
+            <li><b>Conteúdo base:</b> Poema Visual — definição, características e diferença para o poema tradicional.</li>
+            <li><b>Exemplo trabalhado:</b> poema visual sobre o tema "chuva", com as palavras organizadas em cascata.</li>
+            <li><b>Passo a passo de produção:</b> 1) escolher o tema; 2) planejar a forma/desenho que combina com ele; 3) rascunhar a forma a lápis; 4) encaixar as palavras dentro da forma; 5) revisar se o tema é reconhecível só pela forma.</li>
+            <li><b>Recursos importantes:</b> repetição de palavras/letras para preencher o desenho e uso do espaço em branco como parte do sentido do poema.</li>
+        </ul>
     `
 };
 
@@ -5268,6 +5803,19 @@ const exerciciosEscritos = {
             <li>8) Por que dizemos que a arte no Brasil Colonial é um "encontro de culturas"?</li>
         </ul>
         <p style="opacity:.7; font-size:0.85em;">💡 Gabarito: 1) cerâmica, cestaria, grafismos corporais, arte plumária (citar dois); 2) da Ilha de Marajó, no Pará; 3) da Igreja Católica; 4) forte contraste entre luz e sombra (ou movimento/dramaticidade); 5) escultor e arquiteto do Barroco brasileiro, autor dos Profetas de Congonhas; 6) com ouro, talha e ornamentos ricos; 7) ela está ligada a rituais e à relação dos povos indígenas com a natureza; 8) porque mistura elementos europeus, indígenas e depois africanos.</p>
+    `,
+    'Produção Textual': `
+        <h4>✍️ Exercícios — Produção Textual</h4>
+        <p>Tente responder e depois confira no fim:</p>
+        <ul>
+            <li>1) Escolha um tema (ex: "sol", "mar" ou "árvore") e planeje que forma/desenho combinaria com ele.</li>
+            <li>2) Explique com suas palavras a diferença entre poema tradicional e poema visual.</li>
+            <li>3) Por que a repetição de palavras ou letras é um recurso comum no poema visual?</li>
+            <li>4) Que papel o espaço em branco cumpre em um poema visual?</li>
+            <li>5) Faça o rascunho a lápis (ou descreva) da forma que você usaria para um poema visual sobre "coração".</li>
+            <li>6) Depois de pronto um poema visual, o que deve ser conferido na revisão?</li>
+        </ul>
+        <p style="opacity:.7; font-size:0.85em;">💡 Gabarito: 1) resposta livre, desde que a forma tenha relação com o tema escolhido; 2) no tradicional a estrutura é em versos/estrofes com métrica e rima, no visual a forma gráfica pesa tanto quanto (ou mais que) o som; 3) ajuda a preencher e formar o desenho do poema; 4) faz parte do sentido do poema, ajudando a formar a imagem; 5) resposta livre (ex: formato de coração usando a palavra repetida); 6) se dá pra reconhecer o tema só de olhar a forma, mesmo antes de ler as palavras.</p>
     `
 };
 
@@ -5332,6 +5880,14 @@ const videoAulasEscritos = {
             <li><a href="https://www.youtube.com/watch?v=VRNNgG2TfAg" target="_blank" rel="noopener">Arte Indígena Brasileira (6º ano)</a></li>
             <li><a href="https://www.youtube.com/watch?v=L1rpIai9f04" target="_blank" rel="noopener">Aleijadinho — mestre do Barroco</a></li>
             <li><a href="https://www.youtube.com/watch?v=Whbe_lpJBzA" target="_blank" rel="noopener">Arte Barroca Europeia — aula e atividade</a></li>
+        </ul>
+    `,
+    'Produção Textual': `
+        <h4>🎥 Vídeo-aulas — Produção Textual</h4>
+        <ul>
+            <li><a href="https://www.youtube.com/watch?v=LinMLgJiJ8w" target="_blank" rel="noopener">Poema visual (ou concreto) — videoaula sobre o gênero</a></li>
+            <li><a href="https://www.youtube.com/watch?v=i-S5c6UU6Do" target="_blank" rel="noopener">Poema Visual (Poema Concreto) — características e exemplos</a></li>
+            <li><a href="https://www.youtube.com/watch?v=-LQ7iQkvSGw" target="_blank" rel="noopener">Poema concreto — exemplos visuais comentados</a></li>
         </ul>
     `
 };
@@ -5970,6 +6526,94 @@ function embaralharProva(materiaId){
     });
 }
 
+// ===== BANCO DE QUESTÕES — PRODUÇÃO TEXTUAL (Poema Visual) =====
+// Banco maior do que as provas mostradas: cada prova sorteia um subconjunto e embaralha
+// as alternativas, então refazer a prova não cai sempre nas mesmas 10 perguntas na mesma ordem.
+const BANCO_PRODUCAO_TEXTUAL = [
+    { pergunta: 'O que define um poema visual?', opcoes: ['A rima perfeita entre os versos', 'A disposição das palavras na página forma um desenho relacionado ao tema', 'O uso obrigatório de quatro estrofes', 'A ausência total de palavras'], correta: 1 },
+    { pergunta: 'No poema visual, além das palavras, o que ajuda a comunicar o sentido do texto?', opcoes: ['A imagem/desenho formado pela disposição das palavras', 'A rima entre os versos', 'O número de sílabas de cada verso', 'O uso de letra cursiva'], correta: 0 },
+    { pergunta: 'Um poema visual sobre o tema "chuva" provavelmente vai organizar as palavras:', opcoes: ['Sempre em uma única linha reta', 'De forma que lembrem visualmente gotas ou uma cascata caindo', 'Em ordem alfabética', 'Sem nenhuma relação com o tema'], correta: 1 },
+    { pergunta: 'No poema visual, o que costuma ter tanta importância quanto (ou mais que) as palavras?', opcoes: ['A capa do livro', 'A forma visual/gráfica em que elas são organizadas', 'O nome do autor', 'O número de páginas'], correta: 1 },
+    { pergunta: 'Qual é a principal diferença entre o poema tradicional e o poema visual?', opcoes: ['O poema visual não pode ter tema', 'O tradicional se organiza em versos/estrofes com métrica e rima; o visual dá tanto ou mais peso à forma gráfica', 'Não existe diferença', 'O poema visual só pode ser escrito em outro idioma'], correta: 1 },
+    { pergunta: 'Em um poema visual, o uso do espaço em branco na página serve para:', opcoes: ['Fazer parte do sentido do poema, ajudando a formar a imagem', 'Corrigir erros de digitação', 'Substituir o título', 'Indicar o fim do poema, sem nenhum outro papel'], correta: 0 },
+    { pergunta: 'Repetir uma palavra ou letra várias vezes dentro de um poema visual costuma servir para:', opcoes: ['Preencher e ajudar a formar o desenho do poema', 'Aumentar o número de estrofes obrigatórias', 'Corrigir erros de ortografia', 'Substituir a pontuação por vírgulas'], correta: 0 },
+    { pergunta: 'Antes de escrever um poema visual, o que é recomendado planejar primeiro?', opcoes: ['O tema e a forma/desenho que combina com ele', 'Apenas o número de palavras difíceis', 'A editora que vai publicar', 'O tamanho da letra usada'], correta: 0 },
+    { pergunta: 'Na revisão de um poema visual pronto, o que vale a pena conferir?', opcoes: ['Se rima com um poema de outro autor', 'Se dá pra reconhecer o tema só de olhar a forma, mesmo antes de ler as palavras', 'Se tem exatamente 14 versos', 'Se usa apenas letras maiúsculas'], correta: 1 },
+    { pergunta: 'Um bom rascunho de poema visual costuma começar por:', opcoes: ['Desenhar a forma a lápis e depois encaixar as palavras dentro dela', 'Escolher a rima antes de tudo', 'Contar o número de sílabas de cada palavra', 'Escrever sem nenhum planejamento'], correta: 0 },
+    { pergunta: 'O poema visual também é conhecido por qual outro nome, ligado a um movimento literário brasileiro?', opcoes: ['Poema concreto (poesia concreta)', 'Poema épico', 'Soneto', 'Cordel'], correta: 0 },
+    { pergunta: 'Depois de escolher o tema de um poema visual (ex: "coração"), o próximo passo é:', opcoes: ['Organizar as palavras no papel de forma que o conjunto lembre visualmente esse tema', 'Contar quantas letras tem o título', 'Procurar um poema pronto para copiar', 'Escolher só palavras que rimem'], correta: 0 },
+    { pergunta: 'Um poema visual sobre o tema "árvore" provavelmente organizaria as palavras em forma de:', opcoes: ['Uma lista numerada', 'Um tronco com galhos se espalhando', 'Um quadrado perfeito sem relação com o tema', 'Uma única palavra isolada no canto da página'], correta: 1 },
+    { pergunta: 'É correto afirmar sobre o poema visual que:', opcoes: ['Ele precisa seguir métrica e rima rígidas, como o soneto', 'Ele pode dispensar métrica e rima tradicionais, priorizando a forma gráfica', 'Ele nunca pode ter um tema definido', 'Ele só pode ser feito em versos numerados'], correta: 1 },
+    { pergunta: 'No poema visual, a imagem formada pelas palavras funciona como:', opcoes: ['Uma simples decoração, sem relação com o texto', 'Parte do sentido do poema, complementando o que as palavras dizem', 'Um erro de formatação a ser corrigido', 'Um resumo do poema em outro idioma'], correta: 1 },
+    { pergunta: 'Se um poema visual usa a palavra "vento" em linhas onduladas e inclinadas, o objetivo é sugerir visualmente:', opcoes: ['O movimento do vento', 'A imobilidade e o silêncio', 'A cor azul do céu', 'A contagem de sílabas do poema'], correta: 0 },
+    { pergunta: 'Em relação ao poema tradicional, o poema visual valoriza mais:', opcoes: ['A organização espacial e gráfica das palavras na página', 'Exclusivamente a sonoridade e a rima', 'O número fixo de estrofes', 'A ausência total de um tema'], correta: 0 },
+    { pergunta: 'Qual das opções abaixo é um exemplo de recurso comum em poemas visuais?', opcoes: ['Manter sempre o mesmo tamanho de letra em todo o poema', 'Variar o tamanho, a posição ou a repetição das palavras para formar uma imagem', 'Usar apenas uma palavra no poema inteiro, sem repetição', 'Escrever o poema em ordem alfabética, ignorando o tema'], correta: 1 }
+];
+
+// Sorteia "qtd" questões (sem repetir) do banco, embaralha as alternativas de cada uma,
+// e devolve o HTML pronto para inserir na prova + o gabarito (nome do input -> letra correta).
+// rotulo (opcional): prefixo de texto antes da pergunta, usado no Provão para identificar a matéria.
+// numerar (padrão true): numera as perguntas (1., 2., ...), usado na prova individual da matéria.
+function sortearQuestoesProducaoTextual(qtd, prefixoNome, { rotulo = null, numerar = true } = {}) {
+    const letras = ['a', 'b', 'c', 'd'];
+    const escolhidas = embaralhar(BANCO_PRODUCAO_TEXTUAL.slice()).slice(0, qtd);
+    const gabarito = {};
+    let html = '';
+
+    escolhidas.forEach((questao, i) => {
+        const nome = `${prefixoNome}${i + 1}`;
+        const opcoesEmbaralhadas = embaralhar(
+            questao.opcoes.map((texto, idx) => ({ texto, correta: idx === questao.correta }))
+        );
+        let respostaCorreta = 'a';
+        const textoPergunta = rotulo ? `${rotulo} ${questao.pergunta}` : (numerar ? `${i + 1}. ${questao.pergunta}` : questao.pergunta);
+
+        html += `<div class="quiz-q" data-materia="producaotextual"><p>${textoPergunta}</p>`;
+        opcoesEmbaralhadas.forEach((opcao, idx) => {
+            const letra = letras[idx];
+            if (opcao.correta) respostaCorreta = letra;
+            html += `<label class="quiz-opt"><input type="radio" name="${nome}" value="${letra}"> ${letra}) ${opcao.texto}</label>`;
+        });
+        html += `</div>`;
+
+        gabarito[nome] = respostaCorreta;
+    });
+
+    return { html, gabarito };
+}
+
+// Gera a prova individual de Produção Textual sorteando 10 questões do banco de 18.
+function gerarProvaProducaoTextual() {
+    const form = document.getElementById('prova-producaotextual');
+    if (!form) return;
+    const botao = form.querySelector('.corrigir-btn');
+    if (!botao) return;
+
+    form.querySelectorAll('.quiz-q').forEach(q => q.remove());
+
+    const { html, gabarito } = sortearQuestoesProducaoTextual(10, 'pt');
+    botao.insertAdjacentHTML('beforebegin', html);
+    botao.onclick = () => corrigirProva('producaotextual', gabarito);
+}
+
+// Gabarito fixo das 25 questões originais do Provão (Português, Matemática, Geografia, Ciências, História).
+const GABARITO_PROVAO_BASE = { p1: 'a', p2: 'b', p3: 'a', p4: 'c', p5: 'a', m1: 'a', m2: 'c', m3: 'b', m4: 'c', m5: 'b', g1: 'b', g2: 'a', g3: 'a', g4: 'b', g5: 'a', c1: 'a', c2: 'b', c3: 'b', c4: 'b', c5: 'a', h1: 'b', h2: 'b', h3: 'c', h4: 'b', h5: 'b' };
+
+// Acrescenta 5 questões de Produção Textual (sorteadas do mesmo banco) ao Provão Geral,
+// que antes só misturava as 5 matérias antigas.
+function gerarProvaoComProducaoTextual() {
+    const form = document.getElementById('prova-provao');
+    if (!form) return;
+    const botao = form.querySelector('.corrigir-btn');
+    if (!botao) return;
+
+    form.querySelectorAll('.quiz-q[data-materia="producaotextual"]').forEach(q => q.remove());
+
+    const { html, gabarito } = sortearQuestoesProducaoTextual(5, 't', { rotulo: '✍️ Produção Textual —', numerar: false });
+    botao.insertAdjacentHTML('beforebegin', html);
+    botao.onclick = () => corrigirProva('provao', { ...GABARITO_PROVAO_BASE, ...gabarito });
+}
+
 // ===== SISTEMA DE CONTA (só com o nome) =====
 const CHAVE_CONTA = 'conta:nome';
 let nomeContaAtual = '';
@@ -6448,13 +7092,25 @@ function fecharPainelSugestoes(){
     document.getElementById('painelSugestoesModal').style.display = 'none';
 }
 
+// Confere se o texto parece um nome de verdade: exige nome e sobrenome (duas palavras ou mais),
+// só com letras (acentos, hífen e apóstrofo permitidos) — barra coisas como "asdf", "123" ou nome sozinho.
+function nomeParecevalido(nome) {
+    const partes = nome.trim().split(/\s+/);
+    if (partes.length < 2) return false;
+    const regexNomeValido = /^[A-Za-zÀ-ÖØ-öø-ÿ'-]+$/;
+    return partes.every(parte => parte.length >= 2 && regexNomeValido.test(parte));
+}
+
 function entrarConta(){
     const input = document.getElementById('inputNomeLogin');
     const erro = document.getElementById('loginErro');
     const card = input.closest('.login-opcao');
     const nome = input.value.trim();
 
-    if(!nome){
+    if(!nomeParecevalido(nome)){
+        erro.textContent = nome
+            ? 'Digite seu nome completo (nome e sobrenome), só com letras'
+            : 'Digite um nome para continuar';
         erro.classList.add('show');
         card.classList.remove('erro-shake');
         void card.offsetWidth; // reinicia a animação do "shake"
@@ -6759,7 +7415,9 @@ window.addEventListener("load", function(){
     atualizarAvisoProvaDia();
     agendarAtualizacaoAvisoProva();
     iniciarConta();
-    ['provao','portugues','matematica','ciencias','historia','geografia','ingles','artes'].forEach(embaralharProva);
+    gerarProvaProducaoTextual();
+    gerarProvaoComProducaoTextual();
+    ['provao','portugues','portugues2','matematica','matematica2','ciencias','ciencias2','historia','historia2','geografia','geografia2','ingles','ingles2','artes','artes2','producaotextual'].forEach(embaralharProva);
     inicializarMarcacaoQuestoes();
     inicializarSelecaoAlternativas();
     aplicarIlustracoesProvas();
